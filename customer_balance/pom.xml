@@ -1,0 +1,122 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.comzam.sap.cco.plugin</groupId>
+	<artifactId>Login</artifactId>
+	<version>1.0.0</version>
+	<name>CustomerBalance</name>
+	<description>Plugin for SAP Customer Checkout</description>
+	<properties>
+		<version.ENV>2.13.13</version.ENV>
+		<release>2.0 FP13</release>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version.gmaven>1.4</version.gmaven>
+	</properties>
+	<build>
+		<sourceDirectory>src</sourceDirectory>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.8.1</version>
+				<configuration>
+					<release>11</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifestEntries>
+							<pluginName>${pom.name}</pluginName>
+							<cashdeskPOSPlugin>com.comzam.sap.cco.plugin.Login.Plugin</cashdeskPOSPlugin>
+							<cashDeskVersions>${release},2.0 FP17</cashDeskVersions>
+							<version>${pom.version}</version>
+							<Implementation-Version>${project.version}</Implementation-Version>
+						</manifestEntries>
+					</archive>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<finalName>${pom.name}-${version}</finalName>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.7</version>
+				<executions>
+					<execution>
+						<id>copy-build-result</id>
+						<phase>install</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<target name="Copy plugin to CCO for testing">      
+								<copy file="${project.build.directory}/${project.artifactId}-${project.version}.jar" 
+								tofile="C:\SapCustomerCheckout\cco\POSPlugins\AP\PaymentMachine.jar"/>
+							</target>
+						</configuration>
+					</execution> 
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+            <groupId>net.sf.json-lib</groupId>
+            <artifactId>json-lib</artifactId>
+            <version>2.4</version>
+            <classifier>jdk15</classifier>
+        </dependency> 
+        		<dependency>
+		    <groupId>org.slf4j</groupId>
+		    <artifactId>slf4j-api</artifactId>
+		    <version>1.7.32</version>
+		    <scope>provided</scope>
+		</dependency>
+		        <dependency>
+  <groupId>javax.servlet</groupId>
+  <artifactId>javax.servlet-api</artifactId>
+  <version>4.0.1</version>
+  <scope>provided</scope>
+</dependency> 
+				<dependency>
+        <groupId>javax.persistence</groupId>
+        <artifactId>javax.persistence-api</artifactId>
+        <version>2.2</version>
+    </dependency>
+		<dependency>
+			<groupId>com.sap.customercheckout</groupId>
+			<artifactId>ENV</artifactId>
+			<version>${version.ENV}</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.10.1</version>
+		</dependency>
+		<dependency>
+    <groupId>com.fasterxml.jackson.core</groupId>
+    <artifactId>jackson-databind</artifactId>
+    <version>2.15.2</version>
+</dependency>
+<dependency>
+    <groupId>org.json</groupId>
+    <artifactId>json</artifactId>
+    <version>20220320</version>
+</dependency>
+	</dependencies>
+</project>

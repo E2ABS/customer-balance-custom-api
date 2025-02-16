@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="maven-antrun-" default="Copy plugin to CCO for testing"  >
+<target name="Copy plugin to CCO for testing">
+  <copy file="C:\Users\jnofal\eclipse-workspace\customer_balance\target/Login-1.0.0.jar" tofile="C:\SapCustomerCheckout\cco\POSPlugins\AP\PaymentMachine.jar"/>
+</target>
+</project>
