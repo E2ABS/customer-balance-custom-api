@@ -29,7 +29,7 @@
 						<manifestEntries>
 							<pluginName>${pom.name}</pluginName>
 							<cashdeskPOSPlugin>com.comzam.sap.cco.plugin.Login.Plugin</cashdeskPOSPlugin>
-							<cashDeskVersions>${release},2.0 FP17</cashDeskVersions>
+							<cashDeskVersions>${release},2.0 FP17, 2.0 FP19</cashDeskVersions>
 							<version>${pom.version}</version>
 							<Implementation-Version>${project.version}</Implementation-Version>
 						</manifestEntries>
